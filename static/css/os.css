@@ -1,7 +1,7 @@
 :root {
   --os-face: #c0c0c0; --os-light: #fff; --os-shadow: #808080; --os-dark: #202020;
   --os-paper: #fffff4; --os-ink: #171717; --os-blue: #000080; --os-teal: #008080;
-  --os-taskbar-height: 44px; --os-scan-opacity: .045;
+  --os-taskbar-height: 44px; --os-scan-opacity: .14;
   color-scheme: light;
 }
 * { box-sizing: border-box; }
@@ -87,7 +87,24 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .os-start-menu a:hover, .os-start-menu button:hover { background: var(--os-blue); color: #fff; }
 .os-start-menu .pixel-icon { transform: scale(.6); margin: -6px; }
 .os-start-menu hr { margin: 3px 5px; }
-.os-scanlines { position: absolute; inset: 0; z-index: 1200; pointer-events: none; opacity: var(--os-scan-opacity); background: repeating-linear-gradient(to bottom, transparent 0 2px, #000 2px 3px); }
+/* A textura permanece estática; somente a faixa de varredura se move. */
+.os-scanlines {
+  position: absolute; inset: 0; z-index: 1200; overflow: hidden; contain: paint;
+  pointer-events: none; opacity: var(--os-scan-opacity);
+  background: repeating-linear-gradient(to bottom, transparent 0 2px, #000 2px 3px);
+}
+.os-scanlines::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, transparent 50%, #000b 100%),
+    repeating-linear-gradient(90deg, #ff00002e 0 1px, #00ff001c 1px 2px, #0000ff2e 2px 3px);
+}
+.os-scanlines::after {
+  content: ''; position: absolute; top: -12%; left: 0; right: 0; height: 10%;
+  background: linear-gradient(to bottom, transparent, #ffffff66 35%, #00000033 65%, transparent);
+  opacity: .45; will-change: transform;
+  animation: os-crt-sweep 14s cubic-bezier(.37, 0, .63, 1) infinite;
+}
+.os-effects-paused .os-scanlines::after { animation-play-state: paused; }
 .os-boot { position: fixed; inset: 0; z-index: 2000; background: #070710; color: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 20px; font-family: 'Courier New', monospace; }
 .os-boot > .os-logo { width: 42px; height: 42px; }
 .os-boot-name { font: 500 clamp(48px, 10vw, 72px)/1.1 'Courier New', monospace; letter-spacing: -4px; }
@@ -179,6 +196,12 @@ textarea { min-height: 145px; resize: vertical; }
 .error-shell { max-width: 680px; margin: auto; background: var(--os-face); padding: 24px; border: 2px solid; border-color: #fff #222 #222 #fff; }.error-code { font: 600 64px 'Courier New', monospace; color: var(--os-blue); }
 @keyframes os-boot-pass { from { transform: translateX(-55px); } to { transform: translateX(210px); } }
 @keyframes os-cursor-spin { to { transform: rotate(360deg); } }
+@keyframes os-crt-sweep {
+  0% { transform: translate3d(0, 0, 0); }
+  33% { transform: translate3d(0, calc(100dvh / 3 + 40%), 0); }
+  66% { transform: translate3d(0, calc(200dvh / 3 + 80%), 0); }
+  100% { transform: translate3d(0, calc(100dvh + 120%), 0); }
+}
 @media (max-width: 620px) {
   .os-shortcuts { left: 8px; right: 8px; top: 12px; width: auto; grid-template-columns: repeat(3, 1fr); gap: 8px; }.os-shortcut { min-height: 70px; }
   .os-wallpaper { right: 20px; bottom: 75px; }.os-wallpaper strong { font-size: 50px; letter-spacing: -3px; }.os-wallpaper small { display: none; }
@@ -197,7 +220,7 @@ textarea { min-height: 145px; resize: vertical; }
   .os-button, .button, .ghost-button { min-height: 44px; }.os-taskbar { padding: 5px; }.os-start { padding: 4px 8px; }.os-task { height: 44px; }.os-start-menu a, .os-start-menu button { min-height: 44px; }
   .os-tray { height: 42px; }.os-sound { min-width: 32px; height: 40px; }.field input, .field textarea, select { font-size: 16px; }.project-detail-carousel-controls button { min-width: 44px; min-height: 44px; }
 }
-@media (prefers-reduced-motion: reduce) { .os-boot-bar, .os-cursor-loader { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .os-boot-bar, .os-cursor-loader, .os-scanlines::after { animation: none; } }
 @media print {
   .os-shortcuts, .os-wallpaper, .os-start-menu, .os-taskbar, .os-scanlines, .os-titlebar, .os-window-menubar, .os-window-status, .os-resize-handle, .os-boot, .os-cursor-loader, .form-actions { display: none !important; }
   .os-shell { overflow: visible; height: auto; background: #fff; }.os-desktop, .os-windows { position: static; }.os-window { display: none !important; }.os-window.is-active { display: block !important; position: static; width: 100% !important; height: auto !important; border: 0; padding: 0; box-shadow: none; }

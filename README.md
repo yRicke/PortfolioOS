@@ -31,7 +31,8 @@ Depois, use **Iniciar → Administrador**. Contas com as permissões existentes 
 - Janelas independentes com arraste, redimensionamento, minimização, maximização, restauração e alternância pela barra de tarefas.
 - Abra os ícones com um clique. As janelas também podem ser movidas e redimensionadas pelas setas quando o título ou a alça está em foco.
 - Boot de 2,4 segundos na primeira visita da sessão, com opção de pular e reiniciar pelo menu Iniciar.
-- Cursor personalizado, carregamento de aplicativos e textura de tela antiga. O Painel de Controle permite ajustar o atraso, a textura e os sons opcionais.
+- Cursor personalizado e abertura de aplicativos em 0,6 segundo por padrão. O Painel de Controle mantém as opções rápido, nostálgico e instantâneo, preservando preferências já salvas.
+- Efeito de monitor de tubo com scanlines, textura RGB, vinheta e uma faixa de varredura lenta. A animação usa transformações CSS, pausa em abas ocultas e fica estática quando há preferência por movimento reduzido. O efeito pode ser desligado no Painel de Controle.
 - No celular, uma janela por vez fica visível, mantendo a alternância pela barra de tarefas e a maximização.
 
 As URLs Django continuam acessíveis diretamente. Dentro do desktop, páginas da própria origem são abertas em janelas com iframes; login, formulários, CSRF, permissões e redirecionamentos continuam no servidor. O enquadramento entre sites permanece bloqueado. API REST e MCP mantêm seus contratos.

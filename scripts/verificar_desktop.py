@@ -85,6 +85,8 @@ def main():
                     expect(page.locator('[data-os-boot]')).to_be_visible()
                     page.screenshot(path=str(artifacts / 'boot.png'))
                     page.locator('[data-os-skip-boot]').click()
+                    assert page.locator('.os-scanlines').evaluate("(el) => getComputedStyle(el).pointerEvents") == 'none'
+                    assert page.locator('.os-scanlines').evaluate("(el) => getComputedStyle(el, '::after').animationName") == 'os-crt-sweep'
                     expect(page.locator('[data-os-window="inicio"] h1')).to_contain_text('Henrique Vieira')
                     page.screenshot(path=str(artifacts / 'desktop.png'))
                     page.locator('.os-shortcuts [data-os-app="projetos"]').click()
@@ -125,8 +127,15 @@ def main():
                     page.locator('.os-shortcuts [data-os-app="configuracoes"]').click()
                     settings = page.locator('[data-os-window="configuracoes"]')
                     expect(settings).to_be_visible()
+                    expect(settings.locator('[data-os-setting="delay"]')).to_have_value('600')
                     settings.locator('[data-os-setting="scanlines"]').uncheck()
                     assert page.evaluate("getComputedStyle(document.documentElement).getPropertyValue('--os-scan-opacity').trim()") == '0'
+                    expect(page.locator('.os-scanlines')).to_be_hidden()
+                    settings.locator('[data-os-setting="scanlines"]').check()
+                    expect(page.locator('.os-scanlines')).to_be_visible()
+                    settings.locator('[data-os-setting="scanlines"]').uncheck()
+                    settings.locator('[data-os-setting="delay"]').select_option('1800')
+                    expect(settings.locator('[data-os-setting="delay"]')).to_have_value('1800')
                     settings.locator('[data-os-setting="delay"]').select_option('0')
                     settings.locator('[data-window-action="close"]').click()
                     page.locator('[data-os-start]').click()
@@ -191,6 +200,12 @@ def main():
                     assert mobile_page.locator('[data-os-window="projetos"]').bounding_box()['y'] == 0
                     mobile_page.locator('[data-os-window="projetos"] [data-window-action="close"]').click()
                     expect(mobile_page.locator('[data-os-window="inicio"]')).to_be_visible()
+                    reduced = browser.new_context(viewport={'width': 1280, 'height': 800}, reduced_motion='reduce')
+                    reduced_page = reduced.new_page()
+                    reduced_page.goto(base)
+                    expect(reduced_page.locator('[data-os-boot]')).to_be_hidden()
+                    assert reduced_page.locator('.os-scanlines').evaluate("(el) => getComputedStyle(el, '::after').animationName") == 'none'
+                    reduced.close()
                     assert not errors, errors
                     browser.close()
                     print(f'Desktop, boot, janelas, galerias, login, CRUD, uploads, organização e mobile verificados. Catálogo: {initial_count} projetos. Sem erros JavaScript.')

@@ -10,7 +10,7 @@
   #henri-os-concept .hos-desktop {
     --hos-face: #c0c0c0; --hos-light: #fff; --hos-mid: #808080; --hos-dark: #222;
     --hos-paper: #fffff4; --hos-ink: #151515; --hos-blue: #000080; --hos-teal: #008080;
-    --hos-selected: #fff; --hos-line-opacity: .055;
+    --hos-selected: #fff; --hos-line-opacity: .14; --hos-screen-height: 590px;
     position: relative; height: 590px; width: 100%; overflow: hidden;
     background: var(--hos-teal); color: var(--hos-ink); font: 13px/1.45 Tahoma, Verdana, sans-serif;
     isolation: isolate; color-scheme: light;
@@ -93,7 +93,10 @@
   #henri-os-concept .hos-menu button { width: 100%; background: transparent; border: 0; display: block; text-align: left; padding: 10px 13px; }
   #henri-os-concept .hos-menu button:hover { background: var(--hos-blue); color: #fff; }
   #henri-os-concept .hos-menu hr { border: 0; height: 2px; margin: 3px 5px; background: var(--hos-mid); box-shadow: 0 1px var(--hos-light); }
-  #henri-os-concept .hos-scan { position: absolute; inset: 0; z-index: 950; pointer-events: none; opacity: var(--hos-line-opacity); background: repeating-linear-gradient(to bottom, transparent 0 2px, #000 2px 3px); }
+  #henri-os-concept .hos-scan { position: absolute; inset: 0; z-index: 950; overflow: hidden; contain: paint; pointer-events: none; opacity: var(--hos-line-opacity); background: repeating-linear-gradient(to bottom, transparent 0 2px, #000 2px 3px); }
+  #henri-os-concept .hos-scan::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 50%, #000b 100%), repeating-linear-gradient(90deg, #ff00002e 0 1px, #00ff001c 1px 2px, #0000ff2e 2px 3px); }
+  #henri-os-concept .hos-scan::after { content: ''; position: absolute; top: -12%; left: 0; right: 0; height: 10%; background: linear-gradient(to bottom, transparent, #ffffff66 35%, #00000033 65%, transparent); opacity: .45; will-change: transform; animation: hos-crt-sweep 14s cubic-bezier(.37, 0, .63, 1) infinite; }
+  #henri-os-concept.hos-effects-paused .hos-scan::after { animation-play-state: paused; }
   #henri-os-concept .hos-boot { position: absolute; inset: 0; z-index: 980; background: #070710; color: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 18px; font-family: 'Courier New', monospace; }
   #henri-os-concept .hos-boot-name { font: 500 58px/1.1 'Courier New', monospace; letter-spacing: -4px; }
   #henri-os-concept .hos-boot small { color: #bbb; font-size: 12px; }
@@ -112,12 +115,13 @@
   #henri-os-concept .hos-max .hos-content { flex: 1; }
   @keyframes hos-cursor-spin { to { transform: rotate(360deg); } }
   @keyframes hos-boot-pass { 0% { transform: translateX(-55px); } 100% { transform: translateX(210px); } }
+  @keyframes hos-crt-sweep { 0% { transform: translate3d(0, 0, 0); } 33% { transform: translate3d(0, calc(var(--hos-screen-height) / 3 + 40%), 0); } 66% { transform: translate3d(0, calc(var(--hos-screen-height) * 2 / 3 + 80%), 0); } 100% { transform: translate3d(0, calc(var(--hos-screen-height) + 120%), 0); } }
   @media (pointer: fine) {
     #henri-os-concept .hos-desktop.cursor-ready, #henri-os-concept .hos-desktop.cursor-ready button { cursor: none; }
     #henri-os-concept .hos-desktop.cursor-ready .hos-title { cursor: move; }
   }
   @media (max-width: 580px) {
-    #henri-os-concept .hos-desktop { height: 700px; }
+    #henri-os-concept .hos-desktop { height: 700px; --hos-screen-height: 700px; }
     #henri-os-concept .hos-icons, #henri-os-concept [data-skin="studio"] .hos-icons { top: 15px; left: 8px; right: 8px; grid-template-columns: repeat(3, 1fr); gap: 7px 2px; }
     #henri-os-concept .hos-shortcut { width: 100%; }
     #henri-os-concept .hos-watermark { display: none; }
@@ -142,7 +146,7 @@
     #henri-os-concept .hos-controls { gap: 0; }
   }
   @media (prefers-reduced-motion: reduce) {
-    #henri-os-concept .hos-boot-bar, #henri-os-concept .hos-cursor-loader { animation: none; }
+    #henri-os-concept .hos-boot-bar, #henri-os-concept .hos-cursor-loader, #henri-os-concept .hos-scan::after { animation: none; }
   }
 </style>
 <script>
@@ -153,7 +157,7 @@
   const desktops = [];
   const saved = window.openai?.widgetState;
   const initial = saved?.privateContent?.henriOS || {};
-  const appearance = { scanlines: initial.scanlines ?? true, delay: initial.delay ?? 1.8 };
+  const appearance = { scanlines: initial.scanlines ?? true, delay: initial.delay ?? .6 };
   function save() {
     if (!window.openai?.setWidgetState) return;
     const layouts = desktops.map(d => ({ skin: d.skin, windows: Array.from(d.windows.entries()).map(([app, win]) => ({ app, left: win.style.left, top: win.style.top, minimized: win.hidden, maximized: win.classList.contains('hos-max') })) }));
@@ -161,7 +165,8 @@
   }
   function renderAppearance() {
     desktops.forEach(d => {
-      d.el.style.setProperty('--hos-line-opacity', appearance.scanlines ? '.055' : '0');
+      d.el.style.setProperty('--hos-line-opacity', appearance.scanlines ? '.14' : '0');
+      d.el.querySelector('.hos-scan').hidden = !appearance.scanlines;
       d.el.querySelectorAll('[data-setting="scanlines"]').forEach(input => { input.checked = appearance.scanlines; });
     });
   }
@@ -304,10 +309,13 @@
     };
   });
   renderAppearance();
+  const pauseScreenEffects = () => root.classList.toggle('hos-effects-paused', document.hidden);
+  document.addEventListener('visibilitychange', pauseScreenEffects);
+  pauseScreenEffects();
   window.addEventListener('openai:set_globals', event => {
     const incoming = event.detail?.globals?.widgetState?.privateContent?.henriOS;
     if (!incoming) return;
-    appearance.scanlines = incoming.scanlines ?? true; appearance.delay = incoming.delay ?? 1.8;
+    appearance.scanlines = incoming.scanlines ?? true; appearance.delay = incoming.delay ?? .6;
     desktops.forEach(d => d.restore(incoming.layouts?.find(layout => layout.skin === d.skin))); renderAppearance();
   });
   if (globalThis.Tweak) {

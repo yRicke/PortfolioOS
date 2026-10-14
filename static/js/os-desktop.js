@@ -17,7 +17,7 @@
   const readStorage = (storage, key, fallback) => { try { return JSON.parse(storage.getItem(key)) ?? fallback; } catch { return fallback; } };
   const writeStorage = (storage, key, value) => { try { storage.setItem(key, JSON.stringify(value)); } catch { /* O desktop também funciona sem armazenamento. */ } };
   const savedSettings = readStorage(localStorage, 'henri-os:settings', {});
-  const settings = { scanlines: savedSettings.scanlines !== false, sound: savedSettings.sound === true, delay: [0, 600, 1800].includes(savedSettings.delay) ? savedSettings.delay : 1800 };
+  const settings = { scanlines: savedSettings.scanlines !== false, sound: savedSettings.sound === true, delay: [0, 600, 1800].includes(savedSettings.delay) ? savedSettings.delay : 600 };
   const names = { inicio: 'Bem-vindo.txt', projetos: 'Meus projetos', sobre: 'Sobre mim.txt', contato: 'Caixa de entrada', curriculo: 'Currículo.txt', entrar: 'Acesso do administrador', painel_projetos: 'Organizar projetos', adicionar_projeto: 'Adicionar projeto', painel_chave_api: 'Chave da API' };
   const pathKeys = { '/': 'inicio', '/projetos/': 'projetos', '/sobre/': 'sobre', '/contato/': 'contato', '/curriculo/': 'curriculo', '/entrar/': 'entrar', '/painel/projetos/': 'painel_projetos', '/adicionar_projeto/': 'adicionar_projeto', '/painel/api/': 'painel_chave_api' };
   const appKey = path => { const match = path.match(/^\/(projeto|editar_projeto)\/(\d+)\/$/); return pathKeys[path] || (match ? `${match[1] === 'projeto' ? 'projeto' : 'editar'}-${match[2]}` : path); };
@@ -44,7 +44,8 @@
   }
   function sendToFrames(message) { windows.forEach(w => w.frame?.contentWindow?.postMessage(message, location.origin)); }
   function applySettings() {
-    document.documentElement.style.setProperty('--os-scan-opacity', settings.scanlines ? '.045' : '0');
+    document.documentElement.style.setProperty('--os-scan-opacity', settings.scanlines ? '.14' : '0');
+    desktop.querySelector('.os-scanlines').hidden = !settings.scanlines;
     desktop.querySelector('[data-os-sound]').setAttribute('aria-pressed', String(settings.sound));
     desktop.querySelector('[data-os-sound]').setAttribute('aria-label', settings.sound ? 'Desativar sons' : 'Ativar sons');
     desktop.querySelectorAll('[data-os-setting]').forEach(input => { if (input.type === 'checkbox') input.checked = settings[input.dataset.osSetting]; else input.value = String(settings[input.dataset.osSetting]); });
@@ -227,6 +228,9 @@
   updateClock(); setInterval(updateClock, 60000);
   new ResizeObserver(() => windows.forEach(clamp)).observe(stage);
   mobile.addEventListener('change', () => { windows.forEach(clamp); persistWindows(); });
+  const pauseScreenEffects = () => desktop.classList.toggle('os-effects-paused', document.hidden);
+  document.addEventListener('visibilitychange', pauseScreenEffects);
+  pauseScreenEffects();
   if (readStorage(sessionStorage, 'henri-os:booted', false)) skipBoot(); else startBoot();
   const legacyHash = { '#projetos': ['projetos', '/projetos/'], '#sobre': ['sobre', '/sobre/'] }[location.hash];
   if (legacyHash) { const openLegacy = () => openApp(legacyHash[0], names[legacyHash[0]], legacyHash[1]); if (boot.hidden) openLegacy(); else setTimeout(openLegacy, reducedMotion ? 0 : 2450); }
