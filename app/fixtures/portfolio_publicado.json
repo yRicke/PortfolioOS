@@ -1,0 +1,358 @@
+{
+  "origem": "https://henriquevieira-seven.vercel.app/",
+  "projetos": [
+    {
+      "id": 5,
+      "titulo": "Site empresarial voltado a conversão de Clientes",
+      "descricao": "Este projeto consiste em um site institucional desenvolvido para a Fórmula Climatização, empresa especializada em refrigeração e climatização residencial, comercial e industrial. O objetivo principal da plataforma é fortalecer a presença digital da empresa, gerar novos contatos comerciais e aumentar sua visibilidade nos mecanismos de busca, especialmente nas pesquisas do Google. Para isso, o site conta com páginas dedicadas aos serviços oferecidos, áreas de atendimento, conteúdos de blog voltados ao segmento e estratégias de SEO para ampliar o alcance orgânico. Além disso, a plataforma está integrada ao Google Ads e outras ferramentas de análise, permitindo o rastreamento de conversões, monitoramento de campanhas e avaliação de resultados de marketing em tempo real.",
+      "capa_url": "https://henriquevieira-seven.vercel.app/media/projetos/capas/cover-1200x1500.webp",
+      "url": "https://www.refrigeracaoformula.com.br/",
+      "data_criacao": "2026-05-29T12:24:54.431000+00:00",
+      "data_desenvolvimento": null,
+      "ordem": 0,
+      "destaque": false,
+      "imagens": [
+        {
+          "id": 9,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/galeria-site-projeto-5-1.webp",
+          "ordem": 0,
+          "data_criacao": "2026-08-07T18:50:16.460000+00:00"
+        },
+        {
+          "id": 10,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/galeria-site-projeto-5-2.webp",
+          "ordem": 1,
+          "data_criacao": "2026-08-07T18:50:16.743000+00:00"
+        },
+        {
+          "id": 21,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/formula-servicos-1600x900.webp",
+          "ordem": 2,
+          "data_criacao": "2026-08-18T14:28:51.260135+00:00"
+        },
+        {
+          "id": 22,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/formula-blog-1600x900.webp",
+          "ordem": 3,
+          "data_criacao": "2026-08-18T14:28:51.615981+00:00"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "titulo": "iFlower - Marketplace de Flores e Presentes",
+      "descricao": "Plataforma de marketplace desenvolvida em Django que conecta clientes a floriculturas e lojas de presentes. O projeto oferece catálogo por categorias, carrinho com produtos separados por loja, checkout individual por estabelecimento, gestão de pedidos e endereços, além de um painel completo para vendedores administrarem lojas, produtos e faturamento. A aplicação possui design responsivo, banco PostgreSQL e deploy na Vercel.",
+      "capa_url": "https://henriquevieira-seven.vercel.app/media/projetos/capas/cover-1200x1500_TkG0sD3.webp",
+      "url": "https://iflower.vercel.app/",
+      "data_criacao": "2026-07-31T19:39:40.328000+00:00",
+      "data_desenvolvimento": null,
+      "ordem": 1,
+      "destaque": false,
+      "imagens": [
+        {
+          "id": 11,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/galeria-site-projeto-9-1.webp",
+          "ordem": 0,
+          "data_criacao": "2026-08-07T18:50:16.972000+00:00"
+        },
+        {
+          "id": 12,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/galeria-site-projeto-9-2.webp",
+          "ordem": 1,
+          "data_criacao": "2026-08-07T18:50:17.204000+00:00"
+        },
+        {
+          "id": 23,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/iflower-produto-1600x900.webp",
+          "ordem": 2,
+          "data_criacao": "2026-08-18T14:28:53.501670+00:00"
+        },
+        {
+          "id": 24,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/iflower-lojas-1600x900.webp",
+          "ordem": 3,
+          "data_criacao": "2026-08-18T14:28:53.796037+00:00"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "titulo": "GymNote — Diário de Treinos",
+      "descricao": "Desenvolvi o GymNote, uma aplicação web responsiva para organizar e acompanhar treinos de musculação. O sistema permite planejar treinos por dia e grupo muscular, cadastrar exercícios e predefinições personalizadas, registrar peso, repetições, repetições parciais e séries válidas, além de consultar o histórico em um calendário interativo. Construído com Django e PostgreSQL, conta com autenticação, isolamento de dados por usuário, validações de domínio, proteção contra abuso e uma interface mobile-first. O projeto foi implantado na Vercel e pensado para tornar o registro durante o treino rápido, claro e consistente.",
+      "capa_url": "https://henriquevieira-seven.vercel.app/media/projetos/capas/cover-1200x1500_9Gqg37P.webp",
+      "url": "https://gymnote-phi.vercel.app/",
+      "data_criacao": "2026-08-18T14:07:59.049735+00:00",
+      "data_desenvolvimento": "2026-08-01",
+      "ordem": 2,
+      "destaque": true,
+      "imagens": [
+        {
+          "id": 25,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/gymnote-home-1600x900.webp",
+          "ordem": 0,
+          "data_criacao": "2026-08-18T14:28:55.274867+00:00"
+        },
+        {
+          "id": 41,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/gymnote-tela-1-1600x900.webp",
+          "ordem": 1,
+          "data_criacao": "2026-08-18T14:31:56.075828+00:00"
+        },
+        {
+          "id": 42,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/gymnote-tela-2-1600x900.webp",
+          "ordem": 2,
+          "data_criacao": "2026-08-18T14:31:56.272192+00:00"
+        },
+        {
+          "id": 43,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/gymnote-tela-3-1600x900.webp",
+          "ordem": 3,
+          "data_criacao": "2026-08-18T14:31:56.458667+00:00"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "titulo": "Projeto Suri",
+      "descricao": "Desenvolvi o Projeto Suri, uma plataforma inteligente de aprendizagem integrada à API do ChatGPT, capaz de criar trilhas de estudo personalizadas sobre qualquer conteúdo. O sistema gera sequências de aprendizado, corrige automaticamente as respostas dos usuários, fornece feedbacks detalhados e atribui notas para cada etapa da trilha, promovendo um acompanhamento contínuo do progresso. Implementei um dashboard interativo para visualização do desempenho do estudante, facilitando a análise de evolução e pontos de melhoria. O sistema também está conectado ao Gmail para verificação de e-mail e recuperação de senha, garantindo segurança e praticidade no acesso. O objetivo foi criar uma experiência de aprendizado dinâmica, automatizada e acessível, centralizando recursos de ensino, avaliação e suporte em um único ambiente virtual.",
+      "capa_url": "https://henriquevieira-seven.vercel.app/media/projetos/capas/cover-1200x1500_KnXG8Q9.webp",
+      "url": "https://projetosuri.pythonanywhere.com/",
+      "data_criacao": "2026-02-11T20:14:39.289000+00:00",
+      "data_desenvolvimento": "2025-09-01",
+      "ordem": 3,
+      "destaque": false,
+      "imagens": [
+        {
+          "id": 35,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/suri-tela-1-1600x900.webp",
+          "ordem": 0,
+          "data_criacao": "2026-08-18T14:31:53.981732+00:00"
+        },
+        {
+          "id": 36,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/suri-tela-2-1600x900.webp",
+          "ordem": 1,
+          "data_criacao": "2026-08-18T14:31:54.196139+00:00"
+        },
+        {
+          "id": 37,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/suri-tela-3-1600x900.webp",
+          "ordem": 2,
+          "data_criacao": "2026-08-18T14:31:54.413547+00:00"
+        },
+        {
+          "id": 38,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/suri-tela-4-1600x900.webp",
+          "ordem": 3,
+          "data_criacao": "2026-08-18T14:31:54.613509+00:00"
+        },
+        {
+          "id": 39,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/suri-tela-5-1600x900.webp",
+          "ordem": 4,
+          "data_criacao": "2026-08-18T14:31:54.838925+00:00"
+        },
+        {
+          "id": 40,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/suri-tela-6-1600x900.webp",
+          "ordem": 5,
+          "data_criacao": "2026-08-18T14:31:55.036547+00:00"
+        },
+        {
+          "id": 26,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/suri-sobre-1600x900.webp",
+          "ordem": 6,
+          "data_criacao": "2026-08-18T14:28:56.905484+00:00"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "titulo": "Portfólio de Motion Design",
+      "descricao": "Desenvolvi um sistema web de portfólio personalizado para um editor de vídeo, focado em oferecer autonomia na gestão de seus próprios trabalhos. A plataforma permite cadastrar, editar e remover projetos, além de organizar imagens e mídias em sessões específicas, facilitando a atualização constante do conteúdo. Implementei um painel administrativo intuitivo, autenticação de acesso e interface responsiva para desktop e mobile, garantindo usabilidade e praticidade no dia a dia. O projeto foi construído com Django no backend e tecnologias web no frontend, priorizando desempenho, organização dos dados e uma apresentação visual profissional, fortalecendo a presença digital do cliente.",
+      "capa_url": "https://henriquevieira-seven.vercel.app/media/projetos/capas/cover-sobre-1200x1500.webp",
+      "url": "https://www.alvr.com.br/",
+      "data_criacao": "2026-02-06T19:19:10.739000+00:00",
+      "data_desenvolvimento": "2025-07-01",
+      "ordem": 4,
+      "destaque": false,
+      "imagens": [
+        {
+          "id": 13,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/galeria-site-projeto-1-2.webp",
+          "ordem": 0,
+          "data_criacao": "2026-08-07T18:50:17.405000+00:00"
+        },
+        {
+          "id": 27,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/alvr-sobre-1600x900.webp",
+          "ordem": 1,
+          "data_criacao": "2026-08-18T14:28:58.468644+00:00"
+        },
+        {
+          "id": 28,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/alvr-projeto-1600x900.webp",
+          "ordem": 2,
+          "data_criacao": "2026-08-18T14:28:58.677241+00:00"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "titulo": "Chatbot com API da OpenAI",
+      "descricao": "Desenvolvi um chatbot inteligente integrado à API do ChatGPT, voltado para responder dúvidas sobre as temporadas da FTC de forma rápida, clara e humanizada. O sistema interpreta perguntas em linguagem natural e entrega respostas diretas sobre regras, desafios, jogos e informações históricas, simulando uma conversa natural com o usuário. Implementei a integração com a API, tratamento de contexto, formatação das respostas e uma interface web simples e acessível. O objetivo foi centralizar informações técnicas da competição em um assistente virtual prático, melhorando o acesso ao conhecimento e agilizando o suporte para equipes de robótica.",
+      "capa_url": "https://henriquevieira-seven.vercel.app/media/projetos/capas/cover-1200x1500_w1FgsDt.webp",
+      "url": "https://riverpollo.pythonanywhere.com/",
+      "data_criacao": "2026-02-06T19:23:55.621000+00:00",
+      "data_desenvolvimento": null,
+      "ordem": 5,
+      "destaque": false,
+      "imagens": [
+        {
+          "id": 15,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/galeria-site-projeto-2-1.webp",
+          "ordem": 0,
+          "data_criacao": "2026-08-07T18:50:17.824000+00:00"
+        },
+        {
+          "id": 29,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/chatbot-acesso-1600x900.webp",
+          "ordem": 1,
+          "data_criacao": "2026-08-18T14:29:17.033147+00:00"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "titulo": "Genius Embarcado",
+      "descricao": "Projeto web interativo inspirado no jogo Genius, desenvolvido com Django no backend e interface responsiva em JavaScript, com integração local via Arduino para captura de botões físicos e versão demo adaptada para deploy na Vercel. O sistema controla lógica de rodadas, tempo de resposta, pontuação e histórico de tentativas, combinando software embarcado, aplicação web e experiência visual em tempo real.",
+      "capa_url": "https://henriquevieira-seven.vercel.app/media/projetos/capas/cover-1200x1500_26yCgf7.webp",
+      "url": "https://genius-tan.vercel.app/",
+      "data_criacao": "2026-06-11T18:24:04.076000+00:00",
+      "data_desenvolvimento": null,
+      "ordem": 6,
+      "destaque": false,
+      "imagens": [
+        {
+          "id": 16,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/galeria-site-projeto-6-1.webp",
+          "ordem": 0,
+          "data_criacao": "2026-08-07T18:50:17.964000+00:00"
+        },
+        {
+          "id": 30,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/genius-acerto-1600x900.webp",
+          "ordem": 1,
+          "data_criacao": "2026-08-18T14:29:17.894615+00:00"
+        },
+        {
+          "id": 31,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/genius-fim-rodada-1600x900.webp",
+          "ordem": 2,
+          "data_criacao": "2026-08-18T14:29:18.038330+00:00"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "titulo": "Plataforma de Gestão Empresarial",
+      "descricao": "Meu projeto mais completo e com mais tempo investido. Atualmente está implantado em apenas uma empresa, aberto apenas no servidor deles. Uma plataforma web multiempresa para centralizar informações estratégicas e apoiar a tomada de decisões. O sistema reúne, em um único ambiente, módulos financeiros, comerciais, operacionais e administrativos, permitindo acompanhar indicadores, metas, vendas, fluxo de caixa, estoque, produção, faturamento, logística, projetos e atividades.\r\nA aplicação conta com dashboards interativos, importação automatizada de planilhas, geração de relatórios em PDF, cadastros gerenciais e controle de acesso por empresa, usuário e módulo. Também possui API REST para integração com serviços externos, garantindo acesso seguro e estruturado aos dados.",
+      "capa_url": "https://henriquevieira-seven.vercel.app/media/projetos/capas/cover-crop-1200x1500.webp",
+      "url": "",
+      "data_criacao": "2026-07-29T20:11:00.724000+00:00",
+      "data_desenvolvimento": null,
+      "ordem": 7,
+      "destaque": false,
+      "imagens": [
+        {
+          "id": 32,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/gestao-dashboard-1600x900.webp",
+          "ordem": 0,
+          "data_criacao": "2026-08-18T14:29:19.527239+00:00"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "titulo": "Registro de Atividades Religiosas",
+      "descricao": "Projeto desenvolvido para facilitar o registro e o acompanhamento das atividades diárias realizadas pelos integrantes de um grupo religioso. Cada usuário, previamente cadastrado por um administrador, pode gerenciar seus próprios registros e consultar resumos diários e mensais de suas atividades.\r\n\r\nO sistema também disponibiliza ao administrador um painel geral com indicadores e informações consolidadas, permitindo acompanhar o progresso dos integrantes e compreender o andamento das atividades religiosas do grupo.\r\n",
+      "capa_url": "https://henriquevieira-seven.vercel.app/media/projetos/capas/cover-1200x1500_q6Y7mX9.webp",
+      "url": "https://ramalhete-espiritual.vercel.app/",
+      "data_criacao": "2026-07-29T19:57:42.319000+00:00",
+      "data_desenvolvimento": null,
+      "ordem": 8,
+      "destaque": false,
+      "imagens": [
+        {
+          "id": 17,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/galeria-site-projeto-7-1.webp",
+          "ordem": 0,
+          "data_criacao": "2026-08-07T18:50:18.213000+00:00"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "titulo": "Portfólio Próprio",
+      "descricao": "Desenvolvi meu próprio portfólio web como uma aplicação fullstack, com o objetivo de centralizar meus projetos, experiências e habilidades em uma plataforma profissional e de fácil manutenção. O sistema foi construído com Django no backend, permitindo gerenciamento dinâmico de conteúdos como projetos, descrições e mídias por meio de um painel administrativo, sem necessidade de alterar o código. No frontend, foquei em um design moderno, responsivo e performático, priorizando clareza visual e boa experiência do usuário. O projeto também inclui organização de arquivos estáticos, deploy em produção e otimizações de carregamento, refletindo minhas boas práticas de desenvolvimento e arquitetura web.",
+      "capa_url": "https://henriquevieira-seven.vercel.app/media/projetos/capas/cover-1200x1500_1ZLUc4M.webp",
+      "url": "https://henriquevieira.pythonanywhere.com/",
+      "data_criacao": "2026-02-06T19:31:16.352000+00:00",
+      "data_desenvolvimento": null,
+      "ordem": 9,
+      "destaque": false,
+      "imagens": [
+        {
+          "id": 14,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/galeria-site-projeto-3-1.webp",
+          "ordem": 0,
+          "data_criacao": "2026-08-07T18:50:17.618000+00:00"
+        },
+        {
+          "id": 33,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/portfolio-catalogo-1600x900.webp",
+          "ordem": 1,
+          "data_criacao": "2026-08-18T14:29:22.461290+00:00"
+        },
+        {
+          "id": 34,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/portfolio-case-1600x900.webp",
+          "ordem": 2,
+          "data_criacao": "2026-08-18T14:29:22.667733+00:00"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "titulo": "Root Creative — Site Institucional e Portfólio",
+      "descricao": "Desenvolvi uma plataforma web para a Root Creative, agência de comunicação e marketing, reunindo apresentação institucional e portfólio dinâmico em uma experiência visual alinhada à identidade da marca. A interface responsiva combina uma árvore 3D, animações com GSAP, carrosséis interativos e galerias de imagens para apresentar serviços e trabalhos de fotografia, audiovisual, sites e tráfego pago.\n\nNo backend, construí um painel administrativo com Django para cadastrar, editar, organizar e publicar conteúdos, gerenciar álbuns e fotografias e realizar upload de mídias com conversão automática para WebP e WebM. A aplicação conta com autenticação e controle de acesso administrativo, banco PostgreSQL no Neon e deploy na Vercel. O projeto oferece autonomia para atualizar o portfólio e conecta a apresentação dos serviços aos canais de contato da agência.",
+      "capa_url": "https://henriquevieira-seven.vercel.app/media/projetos/capas/rootcreative-capa.webp",
+      "url": "https://rootcreative.vercel.app/",
+      "data_criacao": "2026-09-26T02:59:12.675647+00:00",
+      "data_desenvolvimento": "2026-09-01",
+      "ordem": 10,
+      "destaque": false,
+      "imagens": [
+        {
+          "id": 44,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/rootcreative-inicio.webp",
+          "ordem": 0,
+          "data_criacao": "2026-09-26T02:59:13.076583+00:00"
+        },
+        {
+          "id": 45,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/rootcreative-servicos.webp",
+          "ordem": 1,
+          "data_criacao": "2026-09-26T02:59:13.341061+00:00"
+        },
+        {
+          "id": 46,
+          "url": "https://henriquevieira-seven.vercel.app/media/projetos/galeria/rootcreative-sobre.webp",
+          "ordem": 2,
+          "data_criacao": "2026-09-26T02:59:13.579519+00:00"
+        }
+      ]
+    }
+  ]
+}
