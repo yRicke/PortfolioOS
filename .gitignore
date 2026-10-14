@@ -1,0 +1,17 @@
+# python
+venv/
+__pycache__/
+*.pyc
+
+# django
+db.sqlite3
+staticfiles/
+media/
+
+# env
+.env
+
+# system
+.DS_Store
+.vercel
+.env*

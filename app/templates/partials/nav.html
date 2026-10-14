@@ -1,0 +1,30 @@
+{% load static %}
+<nav class="site-nav" data-site-nav aria-label="Navegação principal">
+    <div class="nav-shell">
+        <a class="brand" href="{% url 'index' %}#inicio" data-anchor-link>
+            <span class="brand-mark" aria-hidden="true">
+                <img src="{% static 'images/logo-hv.webp' %}" alt="">
+            </span>
+            <small>Henrique Vieira</small>
+        </a>
+
+        <div class="nav-links">
+            <a href="{% url 'index' %}#inicio" data-nav-link="inicio" data-anchor-link>Início</a>
+            <a href="{% url 'index' %}#projetos" data-nav-link="projetos" data-anchor-link>Projetos</a>
+            <a href="{% url 'index' %}#sobre" data-nav-link="sobre" data-anchor-link>Sobre</a>
+        </div>
+
+        <div class="nav-tools">
+            {% if user.is_superuser %}
+            <a class="nav-admin" href="{% url 'painel_projetos' %}">Organizar</a>
+            <a class="nav-admin" href="{% url 'adicionar_projeto' %}">+ Projeto</a>
+            {% endif %}
+            {% if user.is_staff %}
+            <a class="nav-admin" href="{% url 'painel_chave_api' %}">API</a>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <a class="nav-admin" href="{% url 'sair' %}">Sair</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
