@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Meus projetos — Henri OS{% endblock %}
+{% block content %}
+<section class="os-explorer">
+    <header class="os-explorer-toolbar"><span class="os-muted">Endereço</span><span class="os-address"><span class="pixel-icon folder" aria-hidden="true"></span>Meu computador / Portfólio / Projetos</span></header>
+    <div class="os-explorer-layout">
+        <aside class="os-explorer-sidebar"><strong>Meus projetos</strong><p>{{ projetos|length }} projetos selecionados</p><hr><p>Aplicações web, automação e ideias que viraram realidade.</p><a href="{% url 'contato' %}" data-os-app="contato" data-os-title="Caixa de entrada">Vamos criar algo?</a></aside>
+        <div class="os-project-grid">
+            {% for projeto in projetos %}
+            <article class="os-project-file" data-project-card>
+                <a href="{% url 'detalhe_projeto' projeto.id %}" data-os-app="projeto-{{ projeto.id }}" data-os-title="{{ projeto.titulo }}" aria-label="Abrir projeto {{ projeto.titulo }}">
+                    <div class="os-project-preview" data-image-frame>{% if projeto.capa %}<img src="{{ projeto.capa.url }}" alt="Capa de {{ projeto.titulo }}" loading="lazy" data-project-image>{% endif %}<span class="image-fallback" aria-hidden="true"><span class="pixel-icon folder"></span></span></div>
+                    <span class="os-file-name">{{ projeto.titulo }}</span><span class="os-file-meta">{% if projeto.destaque %}★ Destaque · {% endif %}{% if projeto.data_desenvolvimento %}{{ projeto.data_desenvolvimento|date:"Y" }}{% else %}{{ projeto.data_criacao|date:"Y" }}{% endif %}</span>
+                </a>
+                {% if user.is_superuser %}<a class="os-file-edit" href="{% url 'editar_projeto' projeto.id %}" data-os-app="editar-{{ projeto.id }}" data-os-title="Editar {{ projeto.titulo }}">Editar projeto</a>{% endif %}
+            </article>
+            {% empty %}<div class="empty-state"><span class="pixel-icon folder" aria-hidden="true"></span><h1>Esta pasta está vazia.</h1><p>Novos projetos estão a caminho.</p>{% if user.is_superuser %}<a class="os-button" href="{% url 'adicionar_projeto' %}">Adicionar primeiro projeto</a>{% endif %}</div>{% endfor %}
+        </div>
+    </div>
+    <footer class="os-explorer-status">{{ projetos|length }} objeto{{ projetos|length|pluralize:"s" }} · Henrique Vieira</footer>
+</section>
+{% endblock %}

@@ -8,7 +8,6 @@ from django.core.exceptions import PermissionDenied
 from django.db import transaction
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_http_methods, require_POST
@@ -230,4 +229,16 @@ def sair(request):
     return redirect('index')
 
 def sobre(request):
-    return redirect(f'{reverse("index")}#sobre')
+    return render(request, 'sobre.html')
+
+
+def projetos(request):
+    return render(request, 'projetos.html', {'projetos': Projeto.objects.all()})
+
+
+def contato(request):
+    return render(request, 'contato.html')
+
+
+def curriculo(request):
+    return render(request, 'curriculo.html')

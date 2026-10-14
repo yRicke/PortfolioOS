@@ -202,117 +202,98 @@ class ConversaoDeCapaTest(TestCase):
 class PortfolioViewTest(TestCase):
     def setUp(self):
         self.projeto = Projeto.objects.create(
-            titulo='Projeto de teste',
-            descricao='Descrição completa do projeto.',
-            capa='projetos/capas/teste.webp',
-            url='https://example.com/',
+            titulo='Projeto de teste', descricao='Descrição completa do projeto.',
+            capa='projetos/capas/teste.webp', url='https://example.com/',
         )
 
-    def test_home_exibe_galeria_horizontal_e_link_do_projeto(self):
+    def test_home_exibe_desktop_e_projeto_em_destaque(self):
         resposta = self.client.get(reverse('index'))
-
         self.assertEqual(resposta.status_code, 200)
-        self.assertContains(resposta, 'data-horizontal-section')
-        self.assertContains(resposta, 'data-project-card')
-        self.assertContains(resposta, 'project-card-label')
-        self.assertContains(resposta, 'cover-card-label')
-        self.assertContains(resposta, 'data-section-curtain')
-        self.assertContains(resposta, 'about-backdrop')
-        self.assertContains(resposta, 'about-hv-bg-mobile.webp')
+        self.assertContains(resposta, 'id="os-desktop"')
+        self.assertContains(resposta, 'data-os-boot')
+        self.assertContains(resposta, 'data-os-app="projetos"')
         self.assertContains(resposta, 'favicon.ico')
         self.assertContains(resposta, 'favicon.png', count=2)
-        self.assertContains(resposta, 'projects-end-arrow')
-        self.assertContains(
-            resposta,
-            'mailto:henriquevieiraperes@gmail.com?subject=Novo%20projeto',
-        )
-        self.assertContains(
-            resposta,
-            'Entrar em contato para criar o próximo projeto',
-        )
-        self.assertContains(resposta, 'cover-art-link')
-        self.assertContains(
-            resposta,
-            f'Abrir projeto em destaque: {self.projeto.titulo}',
-        )
-        self.assertNotContains(resposta, '<i>↘</i>', html=True)
-        self.assertNotContains(resposta, 'data-about-system')
-        self.assertNotContains(resposta, 'data-theme-toggle')
-        self.assertNotContains(resposta, 'cover-facts')
-        self.assertContains(
-            resposta,
-            reverse('detalhe_projeto', args=[self.projeto.id]),
-        )
+        self.assertContains(resposta, f'Abrir projeto em destaque: {self.projeto.titulo}')
+        self.assertContains(resposta, reverse('detalhe_projeto', args=[self.projeto.id]))
         self.assertEqual(resposta.context['projeto_destaque'], self.projeto)
+        self.assertEqual(resposta['X-Frame-Options'], 'DENY')
+        self.assertIn('Sec-Fetch-Dest', resposta['Vary'])
+
+    def test_explorador_exibe_projetos_na_ordem_cadastrada(self):
+        outro = Projeto.objects.create(titulo='Segundo projeto', descricao='Outro', ordem=1)
+        resposta = self.client.get(reverse('projetos'))
+        self.assertEqual(resposta.status_code, 200)
+        self.assertEqual(list(resposta.context['projetos']), [self.projeto, outro])
+        self.assertContains(resposta, self.projeto.capa.url)
+        self.assertContains(resposta, reverse('detalhe_projeto', args=[self.projeto.id]))
+        self.assertNotContains(resposta, 'Editar projeto')
 
     def test_pagina_exclusiva_exibe_dados_do_projeto(self):
-        resposta = self.client.get(
-            reverse('detalhe_projeto', args=[self.projeto.id]),
-        )
-
+        resposta = self.client.get(reverse('detalhe_projeto', args=[self.projeto.id]))
         self.assertEqual(resposta.status_code, 200)
-        self.assertContains(resposta, self.projeto.titulo)
-        self.assertContains(resposta, self.projeto.descricao)
-        self.assertContains(resposta, self.projeto.url)
+        for valor in (self.projeto.titulo, self.projeto.descricao, self.projeto.url):
+            self.assertContains(resposta, valor)
 
-    def test_pagina_exclusiva_exibe_carrossel_manual_no_cabecalho_e_data(self):
+    def test_pagina_exclusiva_exibe_galeria_manual_e_data(self):
         self.projeto.data_desenvolvimento = date(2025, 8, 1)
         self.projeto.save(update_fields=('data_desenvolvimento',))
-        ImagemProjeto.objects.create(
-            projeto=self.projeto,
-            imagem='projetos/galeria/primeira.webp',
-            ordem=0,
-        )
-        ImagemProjeto.objects.create(
-            projeto=self.projeto,
-            imagem='projetos/galeria/segunda.webp',
-            ordem=1,
-        )
-
-        resposta = self.client.get(
-            reverse('detalhe_projeto', args=[self.projeto.id]),
-        )
-
-        self.assertContains(resposta, 'data-project-carousel')
+        for numero, nome in enumerate(('primeira', 'segunda')):
+            ImagemProjeto.objects.create(projeto=self.projeto, imagem=f'projetos/galeria/{nome}.webp', ordem=numero)
+        resposta = self.client.get(reverse('detalhe_projeto', args=[self.projeto.id]))
         self.assertContains(resposta, 'data-project-slide', count=2)
-        self.assertContains(resposta, 'project-detail-hero-chrome')
-        self.assertContains(resposta, 'data-project-carousel-controls')
         self.assertContains(resposta, 'data-project-carousel-previous')
         self.assertContains(resposta, 'data-project-carousel-next')
         self.assertContains(resposta, 'projetos/galeria/primeira.webp', count=1)
         self.assertContains(resposta, 'projetos/galeria/segunda.webp', count=1)
         self.assertNotContains(resposta, self.projeto.capa.url)
-        self.assertNotContains(resposta, 'project-gallery')
-        self.assertNotContains(resposta, 'project-detail-slide-label')
-        self.assertContains(resposta, 'project-detail-overview')
-        self.assertContains(resposta, 'project-detail-signature')
-        self.assertContains(resposta, 'project-detail-signature-logo')
-        self.assertContains(resposta, 'project-detail-next-footer')
         self.assertContains(resposta, 'datetime="2025-08"')
         self.assertContains(resposta, 'Desenvolvido em')
 
-    def test_pagina_exclusiva_sem_imagens_nao_exibe_controles(self):
-        resposta = self.client.get(
-            reverse('detalhe_projeto', args=[self.projeto.id]),
-        )
-
+    def test_pagina_sem_galeria_utiliza_capa_sem_controles(self):
+        resposta = self.client.get(reverse('detalhe_projeto', args=[self.projeto.id]))
         self.assertContains(resposta, 'data-project-slide', count=1)
         self.assertNotContains(resposta, 'data-project-carousel-controls')
-        self.assertNotContains(resposta, self.projeto.capa.url)
+        self.assertContains(resposta, self.projeto.capa.url)
 
     def test_pagina_exclusiva_retorna_404_para_projeto_inexistente(self):
         resposta = self.client.get(reverse('detalhe_projeto', args=[999]))
-
         self.assertEqual(resposta.status_code, 404)
 
-    def test_rota_sobre_redireciona_para_secao_da_home(self):
+    def test_rota_sobre_exibe_aplicativo_com_conteudo_original(self):
         resposta = self.client.get(reverse('sobre'))
+        self.assertEqual(resposta.status_code, 200)
+        self.assertContains(resposta, 'Técnico em Desenvolvimento de Sistemas')
+        self.assertContains(resposta, 'robótica competitiva')
 
-        self.assertRedirects(
-            resposta,
-            f'{reverse("index")}#sobre',
-            fetch_redirect_response=False,
-        )
+    def test_janela_renderiza_conteudo_sem_outro_desktop(self):
+        resposta = self.client.get(reverse('projetos'), {'janela': '1'})
+        self.assertEqual(resposta.status_code, 200)
+        self.assertContains(resposta, 'os-embedded')
+        self.assertNotContains(resposta, 'id="os-desktop"')
+        self.assertNotContains(resposta, 'data-os-boot')
+        self.assertContains(resposta, self.projeto.titulo)
+        self.assertEqual(resposta['X-Frame-Options'], 'SAMEORIGIN')
+
+    def test_navegacao_de_iframe_permanece_embutida_sem_parametro(self):
+        resposta = self.client.get(reverse('sobre'), HTTP_SEC_FETCH_DEST='iframe')
+        self.assertContains(resposta, 'os-embedded')
+        self.assertNotContains(resposta, 'id="os-desktop"')
+        self.assertEqual(resposta['X-Frame-Options'], 'SAMEORIGIN')
+
+    def test_janela_nao_contorna_autenticacao_do_painel(self):
+        resposta = self.client.get(reverse('painel_projetos'), {'janela': '1'}, follow=True, HTTP_SEC_FETCH_DEST='iframe')
+        self.assertEqual(resposta.status_code, 200)
+        self.assertContains(resposta, 'name="password"')
+        self.assertNotContains(resposta, 'data-organizer-form')
+        self.assertContains(resposta, 'os-embedded')
+
+    def test_aplicativos_publicos_de_contato_e_curriculo(self):
+        for rota in ('contato', 'curriculo'):
+            with self.subTest(rota=rota):
+                resposta = self.client.get(reverse(rota))
+                self.assertEqual(resposta.status_code, 200)
+                self.assertContains(resposta, 'Henrique Vieira')
 
 
 class PainelProjetosTest(TestCase):

@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block title %}Currículo — Henri OS{% endblock %}
+{% block content %}
+<article class="os-notepad"><p class="os-eyebrow">curriculo.txt</p><h1>Henrique Vieira</h1><p>Desenvolvedor full-stack<br>Técnico em Desenvolvimento de Sistemas</p><hr><h2>O que construo</h2><p>Aplicações web completas, do backend ao deploy. Sistemas de gestão, marketplaces, APIs, automações e interfaces responsivas.</p><h2>Tecnologias</h2><p>Python · Django · JavaScript · PostgreSQL<br>APIs REST · Git · Vercel · Automação</p><h2>Experiência prática</h2><p>Desenvolvimento de sistemas e produtos digitais, com experiência em robótica competitiva FTC, automação e controle.</p><div class="form-actions"><button type="button" class="os-button" data-print-document>Imprimir / salvar em PDF</button><a class="os-button" href="{% url 'contato' %}" data-os-app="contato" data-os-title="Caixa de entrada">Entrar em contato</a></div></article>
+{% endblock %}

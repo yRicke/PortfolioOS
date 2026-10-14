@@ -1,0 +1,47 @@
+<div id="os-desktop" class="os-desktop" data-home-url="{% url 'index' %}" aria-label="Área de trabalho do Henri OS">
+    <div class="os-wallpaper" aria-hidden="true"><strong>Henri OS</strong><span>PERSONAL EDITION</span><small>Henrique Vieira · Full-stack developer</small></div>
+    <nav class="os-shortcuts" aria-label="Aplicativos da área de trabalho">
+        <a class="os-shortcut" href="{% url 'projetos' %}" data-os-app="projetos" data-os-title="Meus projetos"><span class="pixel-icon folder" aria-hidden="true"></span><span>Meus projetos</span></a>
+        <a class="os-shortcut" href="{% url 'sobre' %}" data-os-app="sobre" data-os-title="Sobre mim.txt"><span class="pixel-icon note" aria-hidden="true"></span><span>Sobre mim</span></a>
+        <a class="os-shortcut" href="{% url 'contato' %}" data-os-app="contato" data-os-title="Caixa de entrada"><span class="pixel-icon mail" aria-hidden="true"></span><span>Contato</span></a>
+        <a class="os-shortcut" href="{% url 'curriculo' %}" data-os-app="curriculo" data-os-title="Currículo.txt"><span class="pixel-icon disk" aria-hidden="true"></span><span>Currículo</span></a>
+        <button class="os-shortcut" type="button" data-os-app="configuracoes" data-os-title="Painel de controle"><span class="pixel-icon gear" aria-hidden="true"></span><span>Configurações</span></button>
+        <a class="os-shortcut" href="{% url 'index' %}" data-os-app="inicio" data-os-title="Bem-vindo.txt"><span class="pixel-icon computer" aria-hidden="true"></span><span>Meu desktop</span></a>
+    </nav>
+    <div class="os-windows" data-os-windows></div>
+    <div class="os-scanlines" aria-hidden="true"></div>
+    <div class="os-start-menu" id="os-start-menu" hidden>
+        <div class="os-menu-brand" aria-hidden="true">Henri OS</div>
+        <nav aria-label="Menu Iniciar">
+            <a href="{% url 'projetos' %}" data-os-app="projetos" data-os-title="Meus projetos"><span class="pixel-icon folder" aria-hidden="true"></span>Meus projetos</a>
+            <a href="{% url 'sobre' %}" data-os-app="sobre" data-os-title="Sobre mim.txt"><span class="pixel-icon note" aria-hidden="true"></span>Sobre mim</a>
+            <a href="{% url 'contato' %}" data-os-app="contato" data-os-title="Caixa de entrada"><span class="pixel-icon mail" aria-hidden="true"></span>Contato</a>
+            <hr>
+            <button type="button" data-os-app="configuracoes" data-os-title="Painel de controle">Painel de controle</button>
+            {% if user.is_superuser %}
+            <a href="{% url 'painel_projetos' %}" data-os-app="painel_projetos" data-os-title="Organizar projetos">Organizar projetos</a>
+            <a href="{% url 'adicionar_projeto' %}" data-os-app="adicionar_projeto" data-os-title="Adicionar projeto">Adicionar projeto…</a>
+            {% endif %}
+            {% if user.is_staff %}<a href="{% url 'painel_chave_api' %}" data-os-app="painel_chave_api" data-os-title="Chave da API">Chave da API</a>{% endif %}
+            {% if user.is_authenticated %}<a href="{% url 'sair' %}" data-os-logout>Sair de {{ user.username }}</a>{% else %}<a href="{% url 'entrar' %}" data-os-app="entrar" data-os-title="Acesso do administrador">Administrador…</a>{% endif %}
+            <hr><button type="button" data-os-restart>Reiniciar…</button>
+        </nav>
+    </div>
+    <nav class="os-taskbar" aria-label="Barra de tarefas">
+        <button type="button" class="os-start os-button" data-os-start aria-expanded="false" aria-controls="os-start-menu"><span class="os-logo" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Iniciar</button>
+        <div class="os-taskbar-divider" aria-hidden="true"></div><div class="os-tasks" data-os-tasks></div>
+        <div class="os-tray"><button type="button" class="os-sound" data-os-sound aria-label="Ativar sons" aria-pressed="false">♪</button><time data-os-clock></time></div>
+    </nav>
+    <div class="os-loading-status" role="status" aria-live="polite" hidden></div>
+</div>
+<div class="os-boot" data-os-boot role="status" aria-label="Iniciando Henri OS">
+    <span class="os-logo" aria-hidden="true"><i></i><i></i><i></i><i></i></span><div class="os-boot-name">Henri OS</div><small>Personal edition · Iniciando o sistema</small>
+    <div class="os-boot-track" aria-hidden="true"><div class="os-boot-bar"></div></div><button type="button" class="os-button" data-os-skip-boot>Pular inicialização</button>
+</div>
+<template id="os-settings-content">
+    <section class="os-settings"><h1>Painel de controle</h1><p>Deixe o desktop do seu jeito.</p>
+        <fieldset><legend>Aparência</legend><label><input type="checkbox" data-os-setting="scanlines"> Textura de tela antiga</label><label><input type="checkbox" data-os-setting="sound"> Sons do sistema</label></fieldset>
+        <fieldset><legend>Velocidade</legend><label for="os-delay">Tempo para abrir um aplicativo</label><select id="os-delay" data-os-setting="delay"><option value="1800">Nostálgico · 1,8 segundo</option><option value="600">Rápido · 0,6 segundo</option><option value="0">Instantâneo</option></select></fieldset>
+        <p class="os-muted">Preferências salvas neste navegador.</p><button type="button" class="os-button" data-os-restart>Reiniciar Henri OS</button>
+    </section>
+</template>

@@ -165,6 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       formulario.classList.remove('is-dirty');
       status.textContent = dados.mensagem;
+      document.dispatchEvent(new CustomEvent('portfolio:updated'));
     } catch (erro) {
       botaoSalvar.disabled = false;
       status.textContent = erro.message;

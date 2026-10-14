@@ -1,40 +1,31 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfólio de Henrique Vieira, desenvolvedor full-stack.">
-    {% load static %}
-    <title>{% block title %}Henrique Vieira — Portfólio{% endblock %}</title>
+    <meta name="description" content="Henri OS — o portfólio de Henrique Vieira, desenvolvedor full-stack, em um desktop inspirado no Windows 98.">
+    <title>{% block title %}Henri OS — Henrique Vieira{% endblock %}</title>
     <link rel="icon" href="{% static 'favicon.ico' %}" sizes="any">
     <link rel="icon" href="{% static 'favicon.png' %}" type="image/png">
     <link rel="apple-touch-icon" href="{% static 'favicon.png' %}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Roboto+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js" defer></script>
+    <link rel="stylesheet" href="{% static 'css/os.css' %}">
+    <script src="{% static 'js/os-desktop.js' %}" defer></script>
     <script src="{% static 'js/site.js' %}" defer></script>
     <script src="{% static 'js/capa-dropzone.js' %}" defer></script>
     <script src="{% static 'js/galeria-upload.js' %}" defer></script>
     {% block extra_scripts %}{% endblock %}
 </head>
-<body class="{% block body_class %}{% endblock %}">
-    <div class="page-transition" data-page-transition aria-hidden="true"></div>
-    {% include "partials/nav.html" %}
-
-    {% if messages %}
-    <div class="messages" aria-live="polite">
-        {% for message in messages %}
-        <div class="message {{ message.tags }}">{{ message }}</div>
-        {% endfor %}
-    </div>
-    {% endif %}
-
-    <main class="site-main">
+<body class="{% if request.os_embedded %}os-embedded{% else %}os-shell{% endif %} {% block body_class %}{% endblock %}">
+    {% if not request.os_embedded %}{% include "partials/os_desktop.html" %}{% endif %}
+    <main id="os-page-content" class="os-page-content" data-page-url="{{ request.path }}">
+        {% if messages %}
+        <div class="messages" aria-live="polite">
+            {% for message in messages %}<div class="message {{ message.tags }}" {% if message.tags == 'success' %}data-content-changed{% endif %}>{{ message }}</div>{% endfor %}
+        </div>
+        {% endif %}
         {% block content %}{% endblock %}
     </main>
+    <noscript><style>.os-boot, .os-taskbar, .os-wallpaper { display: none; } .os-shell { overflow: auto; } .os-desktop { position: relative; } .os-shell > .os-page-content { visibility: visible; position: relative; max-width: 900px; margin: 24px auto; padding: 24px; background: #fffff4; } .os-shell .os-shortcuts { position: relative; display: flex; flex-wrap: wrap; width: auto; padding: 12px; top: auto; left: auto; }</style></noscript>
 </body>
 </html>

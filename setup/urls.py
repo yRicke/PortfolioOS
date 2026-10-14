@@ -30,6 +30,9 @@ urlpatterns = [
     path('admindjango/', admin.site.urls),
     path('', views.index, name='index'),
     path('sobre/', views.sobre, name='sobre'),
+    path('projetos/', views.projetos, name='projetos'),
+    path('contato/', views.contato, name='contato'),
+    path('curriculo/', views.curriculo, name='curriculo'),
 
     path('entrar/', views.entrar, name='entrar'),
     path('sair/', views.sair, name='sair'),
