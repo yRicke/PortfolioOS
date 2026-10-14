@@ -15,3 +15,7 @@ media/
 .DS_Store
 .vercel
 .env*
+
+# artefatos e bancos temporários de verificação
+.codex/artifacts/
+.codex/qa/
