@@ -88,7 +88,7 @@
   function createWindow({ id, title, url, content, geometry }) {
     if (windows.has(id)) { activate(id, true); return windows.get(id); }
     const node = document.createElement('section'); node.className = 'os-window'; node.dataset.osWindow = id; node.setAttribute('role', 'region'); node.setAttribute('aria-label', title);
-    node.innerHTML = '<header class="os-titlebar"><span class="os-window-icon" aria-hidden="true">▤</span><button type="button" class="os-window-title"></button><div class="os-window-controls"><button type="button" class="os-button" data-window-action="minimize">_</button><button type="button" class="os-button" data-window-action="maximize">□</button><button type="button" class="os-button" data-window-action="close">×</button></div></header><div class="os-window-menubar" aria-hidden="true"><span>Arquivo</span><span>Exibir</span><span>Ajuda</span></div><div class="os-window-body"></div><footer class="os-window-status"><span>Henri OS · Henrique Vieira</span><span>Pronto</span></footer><button type="button" class="os-resize-handle" aria-label="Redimensionar janela. Use as setas."></button>';
+    node.innerHTML = '<header class="os-titlebar"><span class="os-window-icon" aria-hidden="true">▤</span><button type="button" class="os-window-title"></button><div class="os-window-controls"><button type="button" class="os-button" data-window-action="minimize">_</button><button type="button" class="os-button" data-window-action="maximize">□</button><button type="button" class="os-button" data-window-action="close">×</button></div></header><div class="os-window-menubar" aria-hidden="true"><span>Arquivo</span><span>Exibir</span><span>Ajuda</span></div><div class="os-window-body"></div><footer class="os-window-status"><span>Portfolio OS · Henrique Vieira</span><span>Pronto</span></footer><button type="button" class="os-resize-handle" aria-label="Redimensionar janela. Use as setas."></button>';
     const sizes = id === 'projetos' || id.startsWith('projeto-') || id === 'painel_projetos' ? [790, 570] : id === 'inicio' ? [570, 540] : [560, 470];
     Object.assign(node.style, { left: `${geometry?.x ?? 150 + windows.size * 32}px`, top: `${geometry?.y ?? 65 + windows.size * 28}px`, width: `${geometry?.width ?? sizes[0]}px`, height: `${geometry?.height ?? sizes[1]}px` });
     const w = { id, title, url: url || '', node, frame: null, dirty: false }; windows.set(id, w); stage.append(node); setTitle(w, title);
@@ -103,7 +103,7 @@
         node.querySelector('.os-window-status > span:last-child').textContent = 'Pronto';
         try {
           if (frame.contentWindow.location.pathname === '/' && w.url !== '/') { returnHome(w); return; }
-          const pageTitle = frame.contentDocument.title.replace(/\s+[—–]\s+(?:Henri OS|Henrique Vieira|Portfólio).*$/, '');
+          const pageTitle = frame.contentDocument.title.replace(/\s+[—–]\s+(?:Portfolio OS|Henrique Vieira|Portfólio).*$/, '');
           if (pageTitle) setTitle(w, pageTitle);
           frame.contentWindow.postMessage({ type: 'henri-os:appearance', scanlines: settings.scanlines }, location.origin);
         } catch { node.querySelector('.os-window-status > span:last-child').textContent = 'Indisponível'; }
@@ -195,7 +195,7 @@
     const source = Array.from(windows.values()).find(w => w.frame?.contentWindow === event.source); if (!source) return;
     const message = event.data;
     if (message?.type === 'henri-os:open') {
-      try { const url = normalizedURL(message.url); openApp(appKey(url.pathname), message.title || names[pathKeys[url.pathname]] || 'Henri OS', url.pathname + url.search); } catch { /* Links externos usam a navegação normal. */ }
+      try { const url = normalizedURL(message.url); openApp(appKey(url.pathname), message.title || names[pathKeys[url.pathname]] || 'Portfolio OS', url.pathname + url.search); } catch { /* Links externos usam a navegação normal. */ }
     }
     if (message?.type === 'henri-os:focus' && active !== source.id) activate(source.id);
     if (message?.type === 'henri-os:dirty') source.dirty = Boolean(message.dirty);

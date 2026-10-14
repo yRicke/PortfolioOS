@@ -1,4 +1,4 @@
-# Henri OS
+# Portfolio OS
 
 Portfólio de Henrique Vieira em Django, com um desktop inspirado no Windows 98. O estudo original permanece em `design/henri-os.html`; a aplicação usa templates e arquivos estáticos próprios.
 
